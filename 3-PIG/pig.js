@@ -1,17 +1,13 @@
 function Game(){
-	this.players = []
+	this.listOfPlayers = [];
+	this.turnNumber = 0;
+	this.currentPot = 0;
 }
-Game.prototype.turn= function() {
-	// do something
+Game.prototype.updateDatePot = function(potAmt) {
+	this.currentPot += Number(potAmt)
+	return this.currentPot
 };
-Game.prototype.rule = function(){
-
+Game.prototype.updateTurnNumber = function(numTurn){
+	this.turnNumber ++
+	return this.t
 }
-
-function Scorekeeper(){
-
-}
-
-function Player(playerName,score){
-/* create player*/
-};

@@ -1,4 +1,0 @@
-pig
-===
-
-dice game pig

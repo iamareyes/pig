@@ -7,7 +7,8 @@ updateDom = function(score1, score2, whoseTurn, dice1, dice2, pot){
 }
 
 createGame = function(player1, player2, scoreMax){
-	var thisGame = new Game(player1, player2, scoreMax);
+	var thisGame = new Game();
+	thisGame.initGame(player1, player2, scoreMax)
 	return thisGame;
 	// here we'll change DOM elements to appear as when the page initially loads
 }

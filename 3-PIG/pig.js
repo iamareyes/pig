@@ -30,12 +30,7 @@ Game.prototype.updatePot = function(potAmt) {
 	this.currentPot += Number(potAmt)
 	return this.currentPot
 };
-// works
-Game.prototype.updateTurnNumber = function(){
-	return this.turnNumber++
-}
-// works
-// works
+
 Game.prototype.rollDice = function(){
 	var die = Math.floor(Math.random() * 6) + 1
 
@@ -56,7 +51,12 @@ Game.prototype.turnControler = function(player_name,currentPot,button,diceValue)
 	}
 }
 Game.prototype.switchPlayer = function(){
-	var i = this.currentPlayer.index
+
+	//set turn number
+	if( this.players.length % this.turnNumber === this.players.length ) this.turnNumber++ ;
+
+	//switch player
+	var i = this.currentPlayer.index ;
 	return this.currentPlayer = ( i < this.players.length) ? this.players[(i + 1)] : this.players[0] ;
 }
 

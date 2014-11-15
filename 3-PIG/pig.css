@@ -1,3 +1,56 @@
 body{
 	background-color: pink;
 }
+
+.player {
+    float:left;
+    border: 1px solid;
+    height:100%;
+    width:30%;
+    clear:none;
+}
+
+
+
+.game div {
+    width:80%;
+    margin: 0 auto;
+}
+
+#game {
+    float:left;
+    border: 1px solid;
+    height:100%;
+    width:36%;
+}
+
+#board-container {
+    border: 1px solid;
+    height:800px;
+    margin-left:7%;
+    margin-right:7%;
+    padding-left:1.5em;
+    padding-right:1.5em;
+
+}
+
+#body-container {
+    margin:5% 10%;
+}  
+
+.make-opaque {
+    z-index:-1;
+    opacity:.1;
+}
+
+#dice-container {
+    margin:0 auto;
+    margin-top: 2em;
+    width:80%;   
+}
+
+#button-container {
+    margin:0 auto;
+    width:40%;
+}
+

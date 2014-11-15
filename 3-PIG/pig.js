@@ -39,7 +39,9 @@ Game.prototype.updateTurnNumber = function(){
 // works
 Game.prototype.rollDice = function(){
 	var die = Math.floor(Math.random() * 6) + 1
+
 	console.log("Player", this.currentPlayer.name, "rolls", die);
+	
 	return die
 }
 // works
@@ -47,7 +49,7 @@ Game.prototype.turnControler = function(player_name,currentPot,button,diceValue)
 	if(button == "bank"){
 
 		//new way to up player score
-		this.currentPlayer.Score(currentPot)
+		this.currentPlayer.Score += currentPot
 		this.updateTurnNumber()
 	}
 	else if(button == "roll"){
@@ -57,5 +59,11 @@ Game.prototype.turnControler = function(player_name,currentPot,button,diceValue)
 }
 Game.prototype.switchPlayer = function(){
 	var i = this.currentPlayer.index
-	return this.currentPlayer = ( i <= this.players.length) ? this.players[(i + 1)] : this.players[0] ;
+	return this.currentPlayer = ( i < this.players.length) ? this.players[(i + 1)] : this.players[0] ;
 }
+
+	thisGame = new Game('mike', 'danny', 50);
+	console.log( thisGame.players )
+	console.log( thisGame.rollDice() )
+	console.log( thisGame.switchPlayer() )
+	console.log( thisGame.rollDice() )

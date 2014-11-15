@@ -18,12 +18,5 @@ createGame = function(player1, player2, scoreMax){
 
 
 $(document).ready(function(){
-	createGame('mike', 'danny', 50);
-	console.log( thisGame.players )
-	console.log( thisGame.rollDice() )
-	console.log( thisGame.switchPlayer() )
-	console.log( thisGame.rollDice() )
-	console.log( thisGame.switchPlayer() )
-	console.log( thisGame.rollDice() )
-	console.log( thisGame.switchPlayer() )
+
 })

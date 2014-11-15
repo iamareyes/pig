@@ -43,13 +43,14 @@ Game.prototype.updatePot = function( potAmt ) {
 };
 
 Game.prototype.rollDice = function(){
-	var die = Math.floor(Math.random() * 6) + 1 ;
+	var die = [ Math.floor(Math.random() * 6) + 1, 
+		Math.floor(Math.random() * 6) + 1 ];
 
 	console.log( "Player", this.currentPlayer.name, "rolls", die ) ;
-	
+
 	return die ;
 }
-Game.prototype.turnControler = function( button, diceValue ){
+Game.prototype.turnControler = function( action ){
 	/*
 	You don't have to have pass player_name or currentPot as an argument in any method
 	the object will keep state, use
@@ -60,12 +61,11 @@ Game.prototype.turnControler = function( button, diceValue ){
 	if(button == "bank"){
 
 		//new way to up player score
-		this.currentPlayer.Score += this.currentPot
-		this.updateTurnNumber()
+		this.currentPlayer.Score += this.currentPot ;
+		switchPlayer();
 	}
-	else if(button == "roll"){
+	else if( action ==="roll"){
 		this.rollDice()
-		this.updateTurnNumber()
 	}
 }
 
@@ -91,8 +91,8 @@ Game.prototype.switchPlayer = function(){
 	return this.currentPlayer ;
 }
 
-//hide test is ran in browser
-if(! jQuery in window ){
+//only show test if ran from nodeJS
+if( typeof( document ) == "undefined" ){
 	thisGame = new Game('mike', 'danny', 50);
 	thisGame.rollDice() ;
 	thisGame.switchPlayer() ;
@@ -116,5 +116,3 @@ if(! jQuery in window ){
 	thisGame.switchPlayer() ;
 	thisGame.rollDice() ;
 }
-
-

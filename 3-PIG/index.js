@@ -63,6 +63,10 @@ $(document).ready(function(){
 			input['game-max-score'] 
 		);
 		
+		//set the players name in the DOM
+		$('#p-one > * > h3').html( input['player-one-name'] );
+		$('#p-two > * > h3').html( input['player-two-name'] );
+
 		//hide modal and show container
 		$('#create-game-modal').slideUp('fast', function(){
 			$('#body-container').toggleClass('make-opaque');
@@ -70,4 +74,13 @@ $(document).ready(function(){
 
 		return false;
 	} );
+
+
+
+	//roll dice, works, but not properly.
+	$('#roll-button').on('click', function(){
+		var dice = thisGame.rollDice();
+		$('#diceOne').attr('src', 'images/' + dice[0] + '.png');
+		$('#diceTwo').attr('src', 'images/' + dice[1] + '.png');
+	});
 } );

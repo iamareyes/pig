@@ -35,7 +35,6 @@ Game.prototype.rollDice = function(){
 }
 // works
 Game.prototype.updateScore = function(player_name,newAmt) {
-	console.log(this.listOfPlayers)
 	for (var i = 0; i < this.listOfPlayers.length; i++){
         if (this.listOfPlayers[i].playerName == player_name){
             this.listOfPlayers[i].score += Number(newAmt);

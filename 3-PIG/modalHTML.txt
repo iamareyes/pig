@@ -1,0 +1,17 @@
+
+	<div id="account-modal">
+		<div id="account-name"><h2>Name:<br></h2></div>
+		<div id="account-balance"><h2>Balance:<br></h2></div>
+
+		<form id="deposit">
+			<input type="text" name="depositamount" placeholder="Deposit amount">
+			<input type="submit" class="button" value="Deposit into account">
+		</form>
+		<br>
+		<form id="withdrawal">
+			<input type="text" name="withdrawalamount" placeholder="Withdrawal amount">
+			<input type="submit" class="button" value="Withdraw from account">
+		</form>
+		<br>
+		<button id="cancel-modal">I'm done</button>
+	</div>

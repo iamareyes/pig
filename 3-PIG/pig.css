@@ -1,3 +1,65 @@
 body{
 	background-color: pink;
 }
+
+#create-game-modal{
+	position: absolute;
+	border: .3em solid black;
+	background: pink;
+	padding: 1em;
+	z-index: 100;
+	/* i cant get it to centered, please try */
+	left: 50%;
+}
+#create-game-modal > p{
+	margin: .3em;
+}
+
+.player {
+	float:left;
+	border: 1px solid;
+	height:100%;
+	width:30%;
+	clear:none;
+}
+
+.game div {
+	width:80%;
+	margin: 0 auto;
+}
+
+#game {
+	float:left;
+	border: 1px solid;
+	height:100%;
+	width:36%;
+}
+
+#board-container {
+	border: 1px solid;
+	height:800px;
+	margin-left:7%;
+	margin-right:7%;
+	padding-left:1.5em;
+	padding-right:1.5em;
+
+}
+
+#body-container {
+	margin:5% 10%;
+}  
+
+.make-opaque {
+	opacity:.1;
+}
+
+#dice-container {
+	margin:0 auto;
+	margin-top: 2em;
+	width:80%;
+}
+
+#button-container {
+	margin:0 auto;
+	width:40%;
+}

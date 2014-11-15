@@ -1,10 +1,87 @@
+<!doctype html>
 <html>
 	<head>
+		<title>Pig</title>
+
+		<!-- style sheets should be loaded before scripts -->
+		<link rel="stylesheet" type = "text/css" href = "pig.css">
+		<link rel="icon" type="image/png" href="favicon.png">
+
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="pig.js"></script>
-		<script src = "index.js"></script>
-		<link rel = "stylesheet" type = "text/css" href = "pig.css">
+		<script src="index.js"></script>
+
 	</head>
 	<body>
+
+	<!-- creat game modal -->
+		<div id="create-game-modal" class="makeGameModal" style="display:none;">
+			<h2>Create Game:</h2>
+
+			<form id="create-game-form" action="#" method="post">
+				<p>
+					<!--use the label tag to label form inputs -->
+					<label>Player One:</label><br />
+					<input type="text" name="player-one-name" />
+				</p>
+
+				<p>
+					<label>Player Two:</label><br />
+					<input type="text" name="player-two-name" />
+				</p>
+
+				<p>
+					<label>Game Max Score:</label><br />
+					<input type="text" name="game-max-score" />
+				</p>
+				<!-- keep form elemnts in the form tag -->
+				<button id="create-game-button">I'm done</button>
+			</form>
+		</div>
+	<!-- end modal -->
+
+		<div id="body-container" class="make-opaque">
+			<header>
+				<center>
+					<h1>Pig Dice Game</h1>
+				</center>
+			</header>
+
+			<div id="board-container">
+				<div class="player" id="p-one">
+					<div class="player-content-container">
+						<h3>Player One:</h3>
+						<br><br>
+						<div id="score1">55</div>
+					</div>
+				</div>
+
+				<div id="game">
+					<div class="game-content-container">
+						<div id="dice-container">
+								<img id="diceOne" src="images/1.png"/>
+								<img id="diceTwo" src="images/1.png"/>  
+						</div>
+						<br><br>
+						<div id="button-container">
+							<button id="bank-button">Bank</button>
+							<button id="roll-button">Roll</button>
+						</div>
+						<br><br>
+						<h3 id="pot-label">Pot:</h3>
+						<div id="pot">55</div>
+					</div>
+				</div>
+
+				<div class="player make-opaque" id="p-two make">
+					<div class="player-content-container">
+						<h3>Player One:</h3>
+						<br><br>
+						<div id="score2">70</div>
+					</div>
+				</div>
+
+			</div>
+		</div> 
 	</body>
 </html>

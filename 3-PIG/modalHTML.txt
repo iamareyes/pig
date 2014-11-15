@@ -14,3 +14,4 @@
 		</form>
 		<br>
 		<button id="cancel-modal">I'm done</button>
+	</div>

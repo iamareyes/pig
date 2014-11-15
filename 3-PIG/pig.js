@@ -1,16 +1,20 @@
 
 // works
 function Game( player1_name, player2_name, scoreMax ){
+	/*
+	Initialize the game and set each variable that will be needed
+	*/
+
 	this.players = [];
 	this.turnNumber = 0;
 	this.currentPot = 0;
 	this.scoreMax = scoreMax || 0;
 
-
+	//Push each player to the players array
 	this.players.push( this.Player(player1_name) ) ;
 	this.players.push( this.Player(player2_name) ) ;
 	
-	//set first player
+	//set first player to player zero
 	this.currentPlayer = this.players[0] ;
 
 	console.log('new game with', this.players.length, 'players!') ;
@@ -20,7 +24,12 @@ function Game( player1_name, player2_name, scoreMax ){
 
 // works
 Game.prototype.Player = function( playerName ){
+	/*
+	Make a setting object for each player to be inserted into the players array
+	*/
 	console.log('player', playerName, 'added.') ;
+
+	//return player object for players array
 	return {
 		index: this.players.length,
 		name: playerName,
@@ -41,13 +50,12 @@ Game.prototype.rollDice = function(){
 	return die ;
 }
 Game.prototype.turnControler = function( button, diceValue ){
-
-	//you dont have to have pass player_name or currentPot as an argument in any method
-	//the object will keep state
-	
-	//use
-	//this.currentPlayer.name for the current player's name
-	//this.currentPot for pot
+	/*
+	You don't have to have pass player_name or currentPot as an argument in any method
+	the object will keep state, use
+	this.currentPlayer.name // for the current player's name
+	this.currentPot // for pot
+	*/
 
 	if(button == "bank"){
 
@@ -62,15 +70,23 @@ Game.prototype.turnControler = function( button, diceValue ){
 }
 
 Game.prototype.switchPlayer = function(){
+	/*
+	This method should probably be named something like endTurn and handle anything 
+	that needs to be done at the end of each players turn.
+	*/
 
+	//get the current player index
 	var i = this.currentPlayer.index ;
 
-	//set turn number
+	//increment the turn counter only id each player has want
 	if( this.players.length === (i + 1) ) this.turnNumber++ ;
 
-	//switch player
+	//switch player to next player
 	this.currentPlayer = ( i < (this.players.length -1) ) ? this.players[ ++i ] : this.players[0] ;
 	
+	//reset the current pot
+	this.currentPot = 0 ;
+
 	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.name, 'turn!')
 	return this.currentPlayer ;
 }

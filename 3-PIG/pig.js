@@ -75,29 +75,30 @@ Game.prototype.switchPlayer = function(){
 	return this.currentPlayer ;
 }
 
+//hide test is ran in browser
+if(! jQuery in window ){
+	thisGame = new Game('mike', 'danny', 50);
+	thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
 
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
 
-thisGame = new Game('mike', 'danny', 50);
-thisGame.rollDice() ;
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
-thisGame.switchPlayer() ;
-thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
+	thisGame.switchPlayer() ;
+	thisGame.rollDice() ;
+}
 
 

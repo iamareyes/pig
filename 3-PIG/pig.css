@@ -1,5 +1,23 @@
+
+
 body{
-	background-color: pink;
+    background-color: pink;
+}
+
+#create-game-modal{
+    position: absolute;
+    border: .3em solid black;
+    background: pink;
+    padding: 1em;
+    z-index: 100;
+    /* i cant get it to centered, please try */
+    left: 50%;
+}
+#create-game-modal > p{
+    margin: .3em;
+}
+#create-game-modal > label{
+    display: block;
 }
 
 .player {
@@ -9,8 +27,6 @@ body{
     width:30%;
     clear:none;
 }
-
-
 
 .game div {
     width:80%;
@@ -39,7 +55,6 @@ body{
 }  
 
 .make-opaque {
-    z-index:-1;
     opacity:.1;
 }
 

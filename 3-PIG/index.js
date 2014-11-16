@@ -18,8 +18,9 @@ $.fn.serializeObject = function(){
 	return o;
 };
 
-updateDom = function(score1, score2, nextPlayer, die, pot, winner){	$('#bank-button').prop("disabled", true)	
-	$('#bank-button').prop("disabled", false)	
+updateDom = function(score1, score2, nextPlayer, die, pot, winner){
+	$('#bank-button').prop("disabled", false)
+	$('#roll-button').prop("disabled", false)			
 	if (winner) {
 		// need html to announce winner and ask for new game
 	}
@@ -37,16 +38,16 @@ updateDom = function(score1, score2, nextPlayer, die, pot, winner){	$('#bank-but
 		$('#bank-button').prop("disabled", true);
 	}
 	if (die[0] == 1 || die[1] == 1) {
-		$('#bank-button, #roll-button').click(function() {
-      var bank = this[0];
-      var roll = this[1];        
-      bank.prop("disabled", true);
-      roll.prop("disabled", true);     
-      setTimeout(function() {
-       bank.prop("disabled", false);
-       roll.prop("disabled", false);   
-      }, 2000);
-    });  
+		$('#bank-button').prop("disabled", true);
+		$('#roll-button').prop("disabled", true);	    		
+		var buttonTimer;
+		function disableButtons(){
+			$('#roll-button').prop("disabled", false); 
+		}
+		function callTimer() {
+			buttonTimer = setTimeout(disableButtons, 2000)
+		};
+		callTimer();
 	}
 }
 
@@ -66,6 +67,7 @@ createGame = function(player1, player2, scoreMax){
 $(document).ready(function(){
 	//bank button shouldn't be enabled with a pot of 0
 	$('#bank-button').prop("disabled", true)	
+	$('#roll-button').prop("disabled", false)				
 
 	//show the make game model
 	$('#create-game-modal').slideDown('slow');

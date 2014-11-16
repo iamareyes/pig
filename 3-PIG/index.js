@@ -97,12 +97,26 @@ $(document).ready(function(){
 		return false;
 	} );
 
+	$( '#bank-button' ).on( 'click', function( event ){
+		thisGame.turnControler( 'bank' );
+	} );
 
+	$( '#bank-newGame' ).on( 'click', function( event ){
+		thisGame = null;
+		$('#body-container').toggleClass('make-opaque');
+		$( '#create-game-modal' ).slideDown('slow');
+
+	} );
 
 	//roll dice, works, but not properly.
 	$('#roll-button').on('click', function(){
+		thisGame.turnControler( 'bank' );
+
+		/*
 		var dice = thisGame.rollDice();
 		$('#diceOne').attr('src', 'images/' + dice[0] + '.png');
 		$('#diceTwo').attr('src', 'images/' + dice[1] + '.png');
+		*/
 	});
+	
 } );

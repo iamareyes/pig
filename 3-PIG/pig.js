@@ -56,8 +56,7 @@ Game.prototype.turnControler = function( action ){
 			this.currentPot = 0;
 			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), false, this.currentPot);
 		}
-	}
-	else if( action == "roll"){
+	} else if( action == "roll"){
 		var newDie = this.rollDice();
 		if (newDie[0] == 1 && newDie[1] == 1) {
 			this.currentPlayer.score = 0;
@@ -67,7 +66,6 @@ Game.prototype.turnControler = function( action ){
 			this.currentPot = 0;
 			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), newDie, this.currentPot);
 		} else {
-			this.currentPot = 0;
 			this.currentPot += (newDie[0] + newDie[1]);
 			updateDom(this.players[0].score, this.players[1].score, null, newDie, this.currentPot);			
 		}

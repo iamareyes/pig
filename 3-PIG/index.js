@@ -85,9 +85,15 @@ $(document).ready(function(){
 		//get the form data into an object
 		var input = $( this ).serializeObject();
 		
-		//make sure the name's are not empty
-		if( input['player-one-name'] === '' || input['player-two-name'] === '' ){
-			alert('Please enter player names');
+		//max score check
+		if( input['game-max-score'] <= 0 ){
+			alert('Please enter positive number!');
+			return false ;
+		}
+
+		//make sure player names are not the same
+		if( input['player-one-name'] === input['player-two-name'] ){
+			alert('Please set different player names');
 			return false ;
 		}
 

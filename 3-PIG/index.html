@@ -22,17 +22,17 @@
 				<p>
 					<!--use the label tag to label form inputs -->
 					<label>Player One:</label><br />
-					<input type="text" name="player-one-name" />
+					<input type="text" name="player-one-name" required />
 				</p>
 
 				<p>
 					<label>Player Two:</label><br />
-					<input type="text" name="player-two-name" />
+					<input type="text" name="player-two-name" required />
 				</p>
 
 				<p>
 					<label>Game Max Score:</label><br />
-					<input type="number" name="game-max-score" required/>
+					<input type="number" name="game-max-score" value="50" required />
 				</p>
 				<!-- keep form elemnts in the form tag -->
 				<button id="create-game-button">I'm done</button>

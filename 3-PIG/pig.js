@@ -1,4 +1,3 @@
-// works
 function Game( player1_name, player2_name, scoreMax ){
 	/*
 	Initialize the game and set each variable that will be needed
@@ -20,8 +19,6 @@ function Game( player1_name, player2_name, scoreMax ){
 	return this ;
 }
 
-
-// works
 Game.prototype.Player = function( playerName ){
 	/*
 	Make a setting object for each player to be inserted into the players array
@@ -77,11 +74,6 @@ Game.prototype.turnControler = function( action ){
 }
 
 Game.prototype.switchPlayer = function(){
-	/*
-	This method should probably be named something like endTurn and handle anything 
-	that needs to be done at the end of each players turn.
-	*/
-
 	//get the current player index
 	var i = this.currentPlayer.index ;
 
@@ -93,30 +85,4 @@ Game.prototype.switchPlayer = function(){
 
 	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.pName, 'turn!')
 	return this.currentPlayer.pName ;
-}
-
-//only show test if ran from nodeJS
-if( typeof( document ) == "undefined" ){
-	thisGame = new Game('mike', 'danny', 50);
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
 }

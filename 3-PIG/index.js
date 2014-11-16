@@ -18,22 +18,24 @@ $.fn.serializeObject = function(){
 	return o;
 };
 
-updateDom = function(score1, score2, whoseTurn, dice1, dice2, pot){
-	$('#diceOne').attr('src', 'images/' + dice1 + '.png');
-	$('#diceTwo').attr('src', 'images/' + dice2 + '.png');
+updateDom = function(score1, score2, whoseTurn, die, pot){
+	if (die) {
+		$('#diceOne').attr('src', 'images/' + die[0] + '.png');
+		$('#diceTwo').attr('src', 'images/' + die[1] + '.png');
+	}
 	$('#pot').html(pot);
 	$('.player').toggleClass('make-opaque');
 	$('#score1').html(score1);
 	$('#score2').html(score2);
-	if (dice1 == 1 || dice2 == 1) {
+	if (die[0] == 1 || die[1] == 1) {
 		$('#bank-button, #roll-button').click(function() {
       var bank = this[0];
       var roll = this[1];        
       bank.disabled = true;
       roll.disabled = true;        
       setTimeout(function() {
-         bank.disabled = false;
-         roll.disabled = false;           
+       bank.disabled = false;
+       roll.disabled = false;           
       }, 2000);
     });  
 	}

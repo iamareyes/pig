@@ -19,8 +19,6 @@ $.fn.serializeObject = function(){
 };
 
 updateDom = function(score1, score2, nextPlayer, die, pot, winner){
-	die = die || [ 1, 1 ];
-
 	$('#pot').html(pot);
 	$('#score1').html(score1);
 	$('#score2').html(score2);

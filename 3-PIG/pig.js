@@ -55,7 +55,7 @@ Game.prototype.turnControler = function( action ){
 	if(action == "bank"){
 		this.currentPlayer.score += this.currentPot ;
 		if (this.currentPlayer.score >= this.scoreMax) {
-			updateDom(null, null, null, null, [ 1,1 ], this.currentPlayer.pName);
+			updateDom(null, null, null, [ 1,1 ], null, this.currentPlayer.pName);
 		} else {
 			this.currentPot = 0;
 			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), null, this.currentPot);

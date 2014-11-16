@@ -18,13 +18,18 @@ $.fn.serializeObject = function(){
 	return o;
 };
 
-updateDom = function(score1, score2, whoseTurn, die, pot){
+updateDom = function(score1, score2, nextPlayer, die, pot, winner){
+	if (winner) {
+		// need html to announce winner and ask for new game
+	}
 	if (die) {
 		$('#diceOne').attr('src', 'images/' + die[0] + '.png');
 		$('#diceTwo').attr('src', 'images/' + die[1] + '.png');
 	}
 	$('#pot').html(pot);
-	$('.player').toggleClass('make-opaque');
+	if (nextPlayer){
+		$('.player').toggleClass('make-opaque');
+	}
 	$('#score1').html(score1);
 	$('#score2').html(score2);
 	if (die[0] == 1 || die[1] == 1) {

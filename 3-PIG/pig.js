@@ -31,7 +31,7 @@ Game.prototype.Player = function( playerName ){
 	//return player object for players array
 	return {
 		index: this.players.length,
-		name: playerName,
+		pName: playerName,
 		score: 0,
 	}
 }
@@ -49,25 +49,30 @@ Game.prototype.rollDice = function(){
 
 	return die ;
 }
-Game.prototype.turnControler = function( action ){
-	/*
-	You don't have to have pass player_name or currentPot as an argument in any method
-	the object will keep state, use
-	this.currentPlayer.name // for the current player's name
-	this.currentPot // for pot
-	*/
 
+Game.prototype.turnControler = function( action ){
 	if(action == "bank"){
 
-		this.currentPlayer.Score += this.currentPot ;
-		if (this.currentPlayer.Score >= this.scoreMax) {
-			//game over, declare winner
+		this.currentPlayer.score += this.currentPot ;
+		if (this.currentPlayer.score >= this.scoreMax) {
+			updateDom(null, null, null, null, null, this.currentPlayer.pName);
 		}
 		this.currentPot = 0;
-		updateDom(this.players[0].score, this.players[1].score, switchPlayer(), null, this.currentPot)
+		updateDom(this.players[0].score, this.players[1].score, switchPlayer(), null, this.currentPot);
 	}
-	else if( action ==="roll"){
-		this.rollDice()
+	else if( action == "roll"){
+		var newDie = rollDice();
+		if (newDie[0] == 1 && newDie[1] == 1) {
+			this.currentPlayer.score = 0;
+			this.currentPot = 0;
+			updateDom(this.players[0].score, this.players[1].score, switchPlayer(), newDie, this.currentPot);
+		} else if (newDie[0] == 1 || newDie[1] == 1) {
+			this.currentPot = 0;
+			updateDom(this.players[0].score, this.players[1].score, switchPlayer(), newDie, this.currentPot);
+		} else {
+			this.currentPot += (newDie[0] + newDie[1]);
+			updateDom(this.players[0].score, this.players[1].score, null, newDie, this.currentPot);			
+		}
 	}
 }
 
@@ -85,12 +90,9 @@ Game.prototype.switchPlayer = function(){
 
 	//switch player to next player
 	this.currentPlayer = ( i < (this.players.length -1) ) ? this.players[ ++i ] : this.players[0] ;
-	
-	//reset the current pot
-	this.currentPot = 0 ;
 
-	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.name, 'turn!')
-	return this.currentPlayer ;
+	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.pName, 'turn!')
+	return this.currentPlayer.pName ;
 }
 
 //only show test if ran from nodeJS

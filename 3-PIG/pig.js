@@ -67,6 +67,7 @@ Game.prototype.turnControler = function( action ){
 			this.currentPot = 0;
 			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), newDie, this.currentPot);
 		} else {
+			this.currentPot = 0;
 			this.currentPot += (newDie[0] + newDie[1]);
 			updateDom(this.players[0].score, this.players[1].score, null, newDie, this.currentPot);			
 		}

@@ -71,6 +71,7 @@ Game.prototype.turnControler = function( action ){
 			this.currentPot = 0;
 			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), newDie, this.currentPot);
 		} else {
+			this.currentPot = 0;
 			this.currentPot += (newDie[0] + newDie[1]);
 			updateDom(this.players[0].score, this.players[1].score, null, newDie, this.currentPot);			
 		}
@@ -97,27 +98,27 @@ Game.prototype.switchPlayer = function(){
 }
 
 //only show test if ran from nodeJS
-if( typeof( document ) == "undefined" ){
-	thisGame = new Game('mike', 'danny', 50);
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
+// if( typeof( document ) == "undefined" ){
+// 	thisGame = new Game('mike', 'danny', 50);
+// 	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
 
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
 
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-}
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
+// 	thisGame.switchPlayer() ;
+// 	thisGame.rollDice() ;
+// }

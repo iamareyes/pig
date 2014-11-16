@@ -52,13 +52,13 @@ Game.prototype.rollDice = function(){
 
 Game.prototype.turnControler = function( action ){
 	if(action == "bank"){
-
 		this.currentPlayer.score += this.currentPot ;
 		if (this.currentPlayer.score >= this.scoreMax) {
 			updateDom(null, null, null, null, null, this.currentPlayer.pName);
+		} else {
+			this.currentPot = 0;
+			updateDom(this.players[0].score, this.players[1].score, switchPlayer(), null, this.currentPot);
 		}
-		this.currentPot = 0;
-		updateDom(this.players[0].score, this.players[1].score, switchPlayer(), null, this.currentPot);
 	}
 	else if( action == "roll"){
 		var newDie = rollDice();

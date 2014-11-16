@@ -19,24 +19,34 @@ $.fn.serializeObject = function(){
 };
 
 updateDom = function(score1, score2, nextPlayer, die, pot, winner){
+	$('#pot').html(pot);
+	$('#score1').html(score1);
+	$('#score2').html(score2);
 	$('#bank-button').prop("disabled", false)
-	$('#roll-button').prop("disabled", false)			
+	$('#roll-button').prop("disabled", false)	
+
 	if (winner) {
-		// need html to announce winner and ask for new game
+		alert(winner + ' IS THE WINNER!!!!!!  \n Play Again?')
+		$('#bank-button').prop("disabled", true)
+		$('#roll-button').prop("disabled", true)			
+		$('#create-game-modal').slideDown('slow');
+		$('#body-container').toggleClass('make-opaque');		
+		newGame();
 	}
+
 	if (die) {
 		$('#diceOne').attr('src', 'images/' + die[0] + '.png');
 		$('#diceTwo').attr('src', 'images/' + die[1] + '.png');
 	}
-	$('#pot').html(pot);
+
 	if (nextPlayer){
 		$('.player').toggleClass('make-opaque');
 	}
-	$('#score1').html(score1);
-	$('#score2').html(score2);
+
 	if (pot == 0 || die[0] == die[1]) {
 		$('#bank-button').prop("disabled", true);
 	}
+
 	if (die[0] == 1 || die[1] == 1) {
 		$('#bank-button').prop("disabled", true);
 		$('#roll-button').prop("disabled", true);	    		
@@ -53,6 +63,7 @@ updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 
 //keep thisGame global
 var thisGame ;
+var newGame;
 
 createGame = function(player1, player2, scoreMax){
 	thisGame = new Game(player1, player2, scoreMax);
@@ -73,38 +84,41 @@ $(document).ready(function(){
 	$('#create-game-modal').slideDown('slow');
 
 	//make game submit
-	$('#create-game-modal > form').on('submit', function( event ){
-		//stop form from processing
-		event.preventDefault();
-
-		//get the form data into an object
-		var input = $( this ).serializeObject();
-		
-		//make sure the name's are not empty
-		if( input['player-one-name'] === '' || input['player-two-name'] === '' ){
-			alert('Please enter player names');
-			return false ;
-		}
-
-		$( this ).find('[type]').val(''); 		
-
-		//start the game
-		createGame( input['player-one-name'], 
-			input['player-two-name'], 
-			input['game-max-score'] 
-		);
-		
-		//set the players name in the DOM
-		$('#p-one > * > h3').html( input['player-one-name'] );
-		$('#p-two > * > h3').html( input['player-two-name'] );
-
-		//hide modal and show container
-		$('#create-game-modal').slideUp('fast', function(){
-			$('#body-container').toggleClass('make-opaque');
+	newGame = function () {
+		$('#create-game-modal > form').on('submit', function( event ){
+			//stop form from processing
+			event.preventDefault();
+	
+			//get the form data into an object
+			var input = $( this ).serializeObject();
+			
+			//make sure the name's are not empty
+			if( input['player-one-name'] === '' || input['player-two-name'] === '' ){
+				alert('Please enter player names');
+				return false ;
+			}
+	
+			$( this ).find('[type]').val(''); 		
+	
+			//start the game
+			createGame( input['player-one-name'], 
+				input['player-two-name'], 
+				input['game-max-score'] 
+			);
+			
+			//set the players name in the DOM
+			$('#p-one > * > h3').html( input['player-one-name'] );
+			$('#p-two > * > h3').html( input['player-two-name'] );
+	
+			//hide modal and show container
+			$('#create-game-modal').slideUp('fast', function(){
+				$('#body-container').toggleClass('make-opaque');
+			})
 		})
-
 		return false;
-	} );
+	} ;
+
+	newGame();
 
 	$( '#bank-button' ).on( 'click', function( event ){
 		thisGame.turnControler( 'bank' );

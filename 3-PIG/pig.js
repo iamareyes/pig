@@ -8,7 +8,6 @@ function Game( player1_name, player2_name, scoreMax ){
 	this.turnNumber = 0;
 	this.currentPot = 0;
 	this.scoreMax = scoreMax || 0;
-	this.dice = [ 1,1 ] ;
 
 	//Push each player to the players array
 	this.players.push( this.Player(player1_name) ) ;
@@ -58,7 +57,7 @@ Game.prototype.turnControler = function( action ){
 			updateDom(null, null, null, [ 1,1 ], null, this.currentPlayer.pName);
 		} else {
 			this.currentPot = 0;
-			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), null, this.currentPot);
+			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), false, this.currentPot);
 		}
 	}
 	else if( action == "roll"){

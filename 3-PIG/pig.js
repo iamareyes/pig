@@ -87,3 +87,27 @@ Game.prototype.switchPlayer = function(){
 	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.pName, 'turn!')
 	return this.currentPlayer.pName ;
 }
+
+//only show test if ran from nodeJS
+// if( typeof( document ) == "undefined" ){
+// thisGame = new Game('mike', 'danny', 50);
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// thisGame.switchPlayer() ;
+// thisGame.rollDice() ;
+// }

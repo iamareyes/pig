@@ -1,75 +1,80 @@
-// works
-function Game( player1_name, player2_name, scoreMax ){
+"use strict";
+function Game( callback ){
 	/*
-	Initialize the game and set each variable that will be needed
+	Initialize the game and set up the object
 	*/
-
 	this.players = [];
 	this.turnNumber = 0;
 	this.currentPot = 0;
-	this.scoreMax = scoreMax || 0;
-
-	//Push each player to the players array
-	this.players.push( this.Player(player1_name) ) ;
-	this.players.push( this.Player(player2_name) ) ;
-	
-	//set first player to player zero
-	this.currentPlayer = this.players[0] ;
+	this.scoreMax = 100;
 
 	console.log('new game with', this.players.length, 'players!') ;
 	return this ;
 }
 
-
 // works
-Game.prototype.Player = function( playerName ){
+Game.prototype.Player = function( player ){
 	/*
 	Make a setting object for each player to be inserted into the players array
 	*/
-	console.log('player', playerName, 'added.') ;
 
-	//return player object for players array
-	return {
-		index: this.players.length,
-		name: playerName,
-		score: 0,
+	if( !Array.isArray( player ) ) player = [player];
+
+	for( var i = 0; i < player.length; i++){
+
+		console.log(this.players.length, 'player', player[i], 'added.') ;
+	
+		this.players.push( {
+			index: this.players.length,
+			name: player[i],
+			score: 0
+		} );
 	}
-}
 
-Game.prototype.updatePot = function( potAmt ) {
-	this.currentPot += Number( potAmt )
-	return this.currentPot
+	//set current player if empty
+	if( !this.currentPlayer ) this.currentPlayer = this.players[0] ;
+	
+	return true;
 };
 
 Game.prototype.rollDice = function(){
+
+	console.log( this.currentPlayer.name, "rolls the dice" );
+
 	var die = [ Math.floor(Math.random() * 6) + 1, 
 		Math.floor(Math.random() * 6) + 1 ];
 
-	console.log( "Player", this.currentPlayer.name, "rolls", die ) ;
+	console.log( "Dice 1", this.currentPlayer.name, die[0], die[1] ) ;
+	
+	if( die[0] === 1 && die[1] === 1 ){
+
+		console.log( "Snake eyes, you lose every thing!" );
+		this.currentPlayer.score = 0;
+		this.switchPlayer();
+
+	}else if( die[0] === 1 || die[1] === 1 ){
+
+		console.log( "Pig! lose your turn!");
+		this.switchPlayer();
+
+	}else{
+		this.currentPot += die[0] + die[1];
+	}
 
 	return die ;
-}
-Game.prototype.turnControler = function( action ){
-	/*
-	You don't have to have pass player_name or currentPot as an argument in any method
-	the object will keep state, use
-	this.currentPlayer.name // for the current player's name
-	this.currentPot // for pot
-	*/
+};
 
-	if(action == "bank"){
+Game.prototype.bank = function(){
 
-		this.currentPlayer.Score += this.currentPot ;
-		if (this.currentPlayer.Score >= this.scoreMax) {
-			//game over, declare winner
-		}
-		this.currentPot = 0;
-		updateDom(this.players[0].score, this.players[1].score, switchPlayer(), null, this.currentPot)
+	this.currentPlayer.score += Number( this.currentPot ) ;
+
+	if ( this.currentPlayer.Score >= this.scoreMax ) {
+		//this.gameOver();
+		return true;
 	}
-	else if( action ==="roll"){
-		this.rollDice()
-	}
-}
+
+	return this.switchPlayer();
+};
 
 Game.prototype.switchPlayer = function(){
 	/*
@@ -80,41 +85,43 @@ Game.prototype.switchPlayer = function(){
 	//get the current player index
 	var i = this.currentPlayer.index ;
 
-	//increment the turn counter only id each player has want
-	if( this.players.length === (i + 1) ) this.turnNumber++ ;
+	//reset current pot
+	this.currentPot = 0;
 
-	//switch player to next player
+	//increment the turn counter only if each player has went
+	if( this.players.length === i + 1 ) this.turnNumber++ ;
+
+	//switch this.currentPlayer to next player
 	this.currentPlayer = ( i < (this.players.length -1) ) ? this.players[ ++i ] : this.players[0] ;
 	
-	//reset the current pot
-	this.currentPot = 0 ;
+	//call the DOM update function
+	this.updateGUI();
 
-	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.name, 'turn!')
 	return this.currentPlayer ;
-}
+};
+
+Game.prototype.updateGUI = function(){
+
+	//update player stats in console
+	this.players.forEach( function( value ){
+		console.log( value.name, 'has', value.score, 'point.' );
+	} );
+
+	console.log( 'Turn:', this.turnNumber, ', its player', this.currentPlayer.name, 'turn!');
+};
 
 //only show test if ran from nodeJS
 if( typeof( document ) == "undefined" ){
-	thisGame = new Game('mike', 'danny', 50);
+	var thisGame = new Game();
+	thisGame.Player( ['bob','frank'] );
+	
 	thisGame.rollDice() ;
+	/*
 	thisGame.switchPlayer() ;
 	thisGame.rollDice() ;
 	thisGame.switchPlayer() ;
 	thisGame.rollDice() ;
 	thisGame.switchPlayer() ;
 	thisGame.rollDice() ;
-
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
-	thisGame.switchPlayer() ;
-	thisGame.rollDice() ;
+	*/
 }

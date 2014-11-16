@@ -19,11 +19,24 @@ $.fn.serializeObject = function(){
 };
 
 updateDom = function(score1, score2, whoseTurn, dice1, dice2, pot){
-	$('#dice').html(dice1, dice2);
+	$('#diceOne').attr('src', 'images/' + dice1 + '.png');
+	$('#diceTwo').attr('src', 'images/' + dice2 + '.png');
 	$('#pot').html(pot);
-	// here we'll toggle some class here to clearly show whose turn it is
+	$('.player').toggleClass('make-opaque');
 	$('#score1').html(score1);
 	$('#score2').html(score2);
+	if (dice1 == 1 || dice2 == 1) {
+		$('#bank-button, #roll-button').click(function() {
+      var bank = this[0];
+      var roll = this[1];        
+      bank.disabled = true;
+      roll.disabled = true;        
+      setTimeout(function() {
+         bank.disabled = false;
+         roll.disabled = false;           
+      }, 2000);
+    });  
+	}
 }
 
 //keep thisGame global
@@ -56,6 +69,8 @@ $(document).ready(function(){
 			alert('Please enter player names');
 			return false ;
 		}
+
+		$( this ).find('[type]').val(''); 		
 
 		//start the game
 		createGame( input['player-one-name'], 

@@ -108,6 +108,7 @@ $(document).ready(function(){
 		//set the players name in the DOM
 		$('#p-one > * > h3').html( input['player-one-name'] );
 		$('#p-two > * > h3').html( input['player-two-name'] );
+		$('#max-score').html(input['game-max-score']);
 
 		//hide modal and show container
 		$('#create-game-modal').slideUp('fast', function(){
@@ -124,11 +125,12 @@ $(document).ready(function(){
 		thisGame.turnControler( 'roll' );
 	});
 
-	$( '#bank-newGame' ).on( 'click', function( event ){
-		//thisGame = null;
+	$('#brand-new-game').on('click', function(){
+		$('#diceOne').attr('src', 'images/1.png');
+		$('#diceTwo').attr('src', 'images/1.png');		
+		$('#bank-button').prop("disabled", true)
+		$('#roll-button').prop("disabled", false)			
+		$('#create-game-modal').slideDown('slow');
 		$('#body-container').toggleClass('make-opaque');
-		$( '#create-game-modal' ).slideDown('slow');
-
-	} );
-	
-} );
+	});
+});

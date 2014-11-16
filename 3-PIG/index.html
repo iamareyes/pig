@@ -19,21 +19,15 @@
 			<h2>Create Game:</h2>
 
 			<form id="create-game-form" action="#" method="post">
-				<p>
 					<!--use the label tag to label form inputs -->
-					<label>Player One:</label><br />
-					<input type="text" name="player-one-name" required />
-				</p>
+					<label>Player One:</label><br>
+					<input type="text" name="player-one-name" required /><br><br>
 
-				<p>
-					<label>Player Two:</label><br />
-					<input type="text" name="player-two-name" required />
-				</p>
+					<label>Player Two:</label><br>
+					<input type="text" name="player-two-name" required /><br><br>
 
-				<p>
-					<label>Game Max Score:</label><br />
-					<input type="number" name="game-max-score" value="50" required />
-				</p>
+					<label>Game Max Score:</label><br>
+					<input type="number" name="game-max-score" value="50" required /><br><br>
 				<!-- keep form elemnts in the form tag -->
 				<button id="create-game-button">I'm done</button>
 			</form>
@@ -70,6 +64,9 @@
 						<br><br>
 						<h3 id="pot-label">Pot:</h3>
 						<div id="pot">0</div>
+						<h4> Goal:</h4>
+						<div id="max-score"></div>
+						<button id="brand-new-game">New Game</button>
 					</div>
 				</div>
 

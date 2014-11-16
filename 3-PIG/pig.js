@@ -57,18 +57,18 @@ Game.prototype.turnControler = function( action ){
 			updateDom(null, null, null, null, null, this.currentPlayer.pName);
 		} else {
 			this.currentPot = 0;
-			updateDom(this.players[0].score, this.players[1].score, switchPlayer(), null, this.currentPot);
+			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), null, this.currentPot);
 		}
 	}
 	else if( action == "roll"){
-		var newDie = rollDice();
+		var newDie = this.rollDice();
 		if (newDie[0] == 1 && newDie[1] == 1) {
 			this.currentPlayer.score = 0;
 			this.currentPot = 0;
-			updateDom(this.players[0].score, this.players[1].score, switchPlayer(), newDie, this.currentPot);
+			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), newDie, this.currentPot);
 		} else if (newDie[0] == 1 || newDie[1] == 1) {
 			this.currentPot = 0;
-			updateDom(this.players[0].score, this.players[1].score, switchPlayer(), newDie, this.currentPot);
+			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), newDie, this.currentPot);
 		} else {
 			this.currentPot += (newDie[0] + newDie[1]);
 			updateDom(this.players[0].score, this.players[1].score, null, newDie, this.currentPot);			

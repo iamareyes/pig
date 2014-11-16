@@ -4,4 +4,4 @@ pig
 dice game pig
 
 
-Do note merge this branch!!!
+Do not merge this branch!!!

@@ -18,7 +18,8 @@ $.fn.serializeObject = function(){
 	return o;
 };
 
-updateDom = function(score1, score2, nextPlayer, die, pot, winner){
+updateDom = function(score1, score2, nextPlayer, die, pot, winner){	$('#bank-button').prop("disabled", true)	
+	$('#bank-button').prop("disabled", false)	
 	if (winner) {
 		// need html to announce winner and ask for new game
 	}
@@ -32,15 +33,18 @@ updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 	}
 	$('#score1').html(score1);
 	$('#score2').html(score2);
+	if (pot == 0 || die[0] == die[1]) {
+		$('#bank-button').prop("disabled", true);
+	}
 	if (die[0] == 1 || die[1] == 1) {
 		$('#bank-button, #roll-button').click(function() {
       var bank = this[0];
       var roll = this[1];        
-      bank.disabled = true;
-      roll.disabled = true;        
+      bank.prop("disabled", true);
+      roll.prop("disabled", true);     
       setTimeout(function() {
-       bank.disabled = false;
-       roll.disabled = false;           
+       bank.prop("disabled", false);
+       roll.prop("disabled", false);   
       }, 2000);
     });  
 	}
@@ -60,6 +64,9 @@ createGame = function(player1, player2, scoreMax){
 
 
 $(document).ready(function(){
+	//bank button shouldn't be enabled with a pot of 0
+	$('#bank-button').prop("disabled", true)	
+
 	//show the make game model
 	$('#create-game-modal').slideDown('slow');
 
@@ -101,22 +108,15 @@ $(document).ready(function(){
 		thisGame.turnControler( 'bank' );
 	} );
 
+	$('#roll-button').on('click', function(){
+		thisGame.turnControler( 'roll' );
+	});
+
 	$( '#bank-newGame' ).on( 'click', function( event ){
 		thisGame = null;
 		$('#body-container').toggleClass('make-opaque');
 		$( '#create-game-modal' ).slideDown('slow');
 
 	} );
-
-	//roll dice, works, but not properly.
-	$('#roll-button').on('click', function(){
-		thisGame.turnControler( 'bank' );
-
-		/*
-		var dice = thisGame.rollDice();
-		$('#diceOne').attr('src', 'images/' + dice[0] + '.png');
-		$('#diceTwo').attr('src', 'images/' + dice[1] + '.png');
-		*/
-	});
 	
 } );

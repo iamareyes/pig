@@ -1,4 +1,3 @@
-
 // works
 function Game( player1_name, player2_name, scoreMax ){
 	/*
@@ -58,11 +57,14 @@ Game.prototype.turnControler = function( action ){
 	this.currentPot // for pot
 	*/
 
-	if(button == "bank"){
+	if(action == "bank"){
 
-		//new way to up player score
 		this.currentPlayer.Score += this.currentPot ;
-		switchPlayer();
+		if (this.currentPlayer.Score >= this.scoreMax) {
+			//game over, declare winner
+		}
+		this.currentPot = 0;
+		updateDom(this.players[0].score, this.players[1].score, switchPlayer(), null, this.currentPot)
 	}
 	else if( action ==="roll"){
 		this.rollDice()

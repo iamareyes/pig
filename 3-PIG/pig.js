@@ -8,6 +8,7 @@ function Game( player1_name, player2_name, scoreMax ){
 	this.turnNumber = 0;
 	this.currentPot = 0;
 	this.scoreMax = scoreMax || 0;
+	this.dice = [ 1,1 ] ;
 
 	//Push each player to the players array
 	this.players.push( this.Player(player1_name) ) ;
@@ -45,7 +46,7 @@ Game.prototype.rollDice = function(){
 	var die = [ Math.floor(Math.random() * 6) + 1, 
 		Math.floor(Math.random() * 6) + 1 ];
 
-	console.log( "Player", this.currentPlayer.name, "rolls", die ) ;
+	console.log( "Player", this.currentPlayer.pName, "rolls", die ) ;
 
 	return die ;
 }
@@ -54,7 +55,7 @@ Game.prototype.turnControler = function( action ){
 	if(action == "bank"){
 		this.currentPlayer.score += this.currentPot ;
 		if (this.currentPlayer.score >= this.scoreMax) {
-			updateDom(null, null, null, null, null, this.currentPlayer.pName);
+			updateDom(null, null, null, null, [ 1,1 ], this.currentPlayer.pName);
 		} else {
 			this.currentPot = 0;
 			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), null, this.currentPot);

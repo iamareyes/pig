@@ -19,6 +19,8 @@ $.fn.serializeObject = function(){
 };
 
 updateDom = function(score1, score2, nextPlayer, die, pot, winner){
+	die = die || [ 1, 1 ];
+
 	$('#pot').html(pot);
 	$('#score1').html(score1);
 	$('#score2').html(score2);
@@ -30,8 +32,7 @@ updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 		$('#bank-button').prop("disabled", true)
 		$('#roll-button').prop("disabled", true)			
 		$('#create-game-modal').slideDown('slow');
-		$('#body-container').toggleClass('make-opaque');		
-		newGame();
+		$('#body-container').toggleClass('make-opaque');
 	}
 
 	if (die) {
@@ -84,41 +85,37 @@ $(document).ready(function(){
 	$('#create-game-modal').slideDown('slow');
 
 	//make game submit
-	newGame = function () {
-		$('#create-game-modal > form').on('submit', function( event ){
-			//stop form from processing
-			event.preventDefault();
-	
-			//get the form data into an object
-			var input = $( this ).serializeObject();
-			
-			//make sure the name's are not empty
-			if( input['player-one-name'] === '' || input['player-two-name'] === '' ){
-				alert('Please enter player names');
-				return false ;
-			}
-	
-			$( this ).find('[type]').val(''); 		
-	
-			//start the game
-			createGame( input['player-one-name'], 
-				input['player-two-name'], 
-				input['game-max-score'] 
-			);
-			
-			//set the players name in the DOM
-			$('#p-one > * > h3').html( input['player-one-name'] );
-			$('#p-two > * > h3').html( input['player-two-name'] );
-	
-			//hide modal and show container
-			$('#create-game-modal').slideUp('fast', function(){
-				$('#body-container').toggleClass('make-opaque');
-			})
-		})
-		return false;
-	} ;
+	$('#create-game-modal > form').on('submit', function( event ){
+		//stop form from processing
+		event.preventDefault();
 
-	newGame();
+		//get the form data into an object
+		var input = $( this ).serializeObject();
+		
+		//make sure the name's are not empty
+		if( input['player-one-name'] === '' || input['player-two-name'] === '' ){
+			alert('Please enter player names');
+			return false ;
+		}
+
+		$( this ).find('[type]').val(''); 		
+
+		//start the game
+		createGame( input['player-one-name'], 
+			input['player-two-name'], 
+			input['game-max-score'] 
+		);
+		
+		//set the players name in the DOM
+		$('#p-one > * > h3').html( input['player-one-name'] );
+		$('#p-two > * > h3').html( input['player-two-name'] );
+
+		//hide modal and show container
+		$('#create-game-modal').slideUp('fast', function(){
+			$('#body-container').toggleClass('make-opaque');
+		});
+		return false;
+	});
 
 	$( '#bank-button' ).on( 'click', function( event ){
 		thisGame.turnControler( 'bank' );
@@ -129,7 +126,7 @@ $(document).ready(function(){
 	});
 
 	$( '#bank-newGame' ).on( 'click', function( event ){
-		thisGame = null;
+		//thisGame = null;
 		$('#body-container').toggleClass('make-opaque');
 		$( '#create-game-modal' ).slideDown('slow');
 

@@ -30,7 +30,7 @@ Game.prototype.Player = function( playerName ){
 		index: this.players.length,
 		pName: playerName,
 		score: 0,
-	}
+	} ;
 }
 
 Game.prototype.updatePot = function( potAmt ) {
@@ -67,7 +67,7 @@ Game.prototype.turnControler = function( action ){
 			updateDom(this.players[0].score, this.players[1].score, this.switchPlayer(), newDie, this.currentPot);
 		} else {
 			this.currentPot += (newDie[0] + newDie[1]);
-			updateDom(this.players[0].score, this.players[1].score, null, newDie, this.currentPot);			
+			updateDom(this.players[0].score, this.players[1].score, null, newDie, this.currentPot);
 		}
 	}
 }
@@ -76,17 +76,18 @@ Game.prototype.switchPlayer = function(){
 	//get the current player index
 	var i = this.currentPlayer.index ;
 
-	//increment the turn counter only id each player has want
+	//increment the turn counter only if each player has went
 	if( this.players.length === (i + 1) ) this.turnNumber++ ;
 
 	//switch player to next player
 	this.currentPlayer = ( i < (this.players.length -1) ) ? this.players[ ++i ] : this.players[0] ;
 
-	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.pName, 'turn!')
+	console.log('Turn:', this.turnNumber, ', its player', this.currentPlayer.pName, 'turn!');
+
 	return this.currentPlayer.pName ;
 }
 
-//only show test if ran from nodeJS
+//only show tests if ran from nodeJS
 // if( typeof( document ) == "undefined" ){
 // thisGame = new Game('mike', 'danny', 50);
 // thisGame.rollDice() ;

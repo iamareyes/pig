@@ -2,64 +2,148 @@ body{
 	background-color: pink;
 }
 
-#create-game-modal{
-	position: absolute;
-	border: .3em solid black;
-	background: pink;
-	padding: 1em;
-	z-index: 100;
-	/* i cant get it to centered, please try */
-	left: 50%;
-}
-#create-game-modal > p{
-	margin: .3em;
+h1{
+	font-size: 5em;
 }
 
-.player {
-	float:left;
-	border: 1px solid;
-	height:30em;
-	width:30%;
-	clear:none;
+h2{
+	font-size: 2em;
 }
 
-.game div {
-	width:80%;
-	margin: 0 auto;
+h3{
+	font-style: 1.5em;
 }
 
-#game {
-	float:left;
-	border: 1px solid;
-	height:30em;
-	width:36%;
-}
-
-#board-container {
-	border: 1px solid;
-	height:30em;
-	margin-left:7%;
-	margin-right:7%;
-	padding-left:1.5em;
-	padding-right:1.5em;
+h4{
 
 }
 
-#body-container {
-	margin:5% 10%;
-}  
+button{
+	border-radius: 50%;
+	padding: .7em;
+	border-left: .2em solid rgb(221, 221, 221);
+	border-top: .2em solid rgb(221, 221, 221);
+	border-right: .2em solid black;
+	border-bottom: .2em solid black; 
+}
+
+button:hover{
+	border-right: .2em solid rgb(221, 221, 221);
+	border-bottom: .2em solid rgb(221, 221, 221);
+
+	border-top: .2em solid black;
+	border-left: .2em solid black;
+
+	-webkit-transform: scale(1.3);
+}
 
 .make-opaque {
 	opacity:.1;
 }
 
-#dice-container {
-	margin:0 auto;
-	margin-top: 2em;
-	width:80%;
+.create-game-modal{
+	top: 6.5em;
+	position: absolute;
+	border: .3em solid black;
+	background: pink;
+	padding: 1em;
+	z-index: 100;
+	margin-left: 40%;
+	border-radius: 10%;
+	padding: 1.8em;
+	padding-top: 1.4em;
+	padding-bottom: .8em;
+
 }
 
-#button-container {
-	margin:0 auto;
-	width:40%;
+.create-game-modal legend{
+	padding: .5em;
+	border:.2em solid black;
+	background: inherit;
+	border-radius: 47%;
+}
+
+.create-game-modal > p{
+	margin: .3em;
+}
+
+header{
+	height:7em;
+	min-width:8em;
+	width: 100%;
+	text-align: center;
+	display: block;
+	position: absolute;
+	border-bottom: .2em dotted black;
+}
+
+header > aside{
+	text-align: center;
+	width: 20%;
+	height: 100%;
+	float: left;
+	font-size: 3em;
+}
+
+header > aside:nth-of-type(1){
+	margin-top: .4em;
+}
+
+header > aside:nth-of-type(2) > button{
+	font-size: .5em;
+	margin-top: .6em; 
+}
+
+header > section{
+	text-align: center;
+	width: 60%;
+	height: 100%;
+	float: left;
+}
+
+header > aside > div{
+	display: inline-block;
+}
+
+#spacer{
+	height: 8em;
+	display: block;
+}
+
+main{
+	left: 0;
+	height:30em;
+	min-width:8em;
+	width: 100%;
+	display: block;
+	/*margin: 1em auto;*/
+}
+
+main > aside{
+	text-align: center;
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+
+main > section{
+	text-align: center;
+	width: 60%;
+	min-width: 270px;
+	height: 100%;
+	float: left;
+}
+
+.buttons > button{
+	margin: .3em;
+}
+.game > p{
+	/*margin:0 auto;*/
+	margin-top: 1em;
+	width: 100%;
+	display: block;
+}
+
+.game button{
+	font-size: 1.2em;
 }

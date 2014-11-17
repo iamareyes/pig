@@ -1,5 +1,5 @@
 "use strict";
-function Game( callback ){
+function Game(){
 	/*
 	Initialize the game and set up the object
 	*/
@@ -7,6 +7,7 @@ function Game( callback ){
 	this.turnNumber = 0;
 	this.currentPot = 0;
 	this.scoreMax = 100;
+	this.bankDisable = true;
 
 	console.log('new game with', this.players.length, 'players!') ;
 	return this ;
@@ -57,14 +58,29 @@ Game.prototype.rollDice = function(){
 		console.log( "Pig! lose your turn!");
 		this.switchPlayer();
 
-	}else{
+	}else if( die[0] === die[1] ){
+
+		console.log( "Doubles, you MUST roll again!" );
+
 		this.currentPot += die[0] + die[1];
+		this.bankDisable = true;
+		
+	}else{
+
+		this.bankDisable = false;
+		this.currentPot += die[0] + die[1];
+
 	}
 
 	return die ;
 };
 
 Game.prototype.bank = function(){
+
+	if( this.bankDisable ){
+		console.log( 'Bank is disabled, please roll' );
+		return false;
+	}
 
 	this.currentPlayer.score += Number( this.currentPot ) ;
 
@@ -75,6 +91,12 @@ Game.prototype.bank = function(){
 
 	return this.switchPlayer();
 };
+
+Game.prototype.gameOver = function(){
+	//needs work...
+
+	console.log('winner');
+}
 
 Game.prototype.switchPlayer = function(){
 	/*
@@ -94,7 +116,7 @@ Game.prototype.switchPlayer = function(){
 	//switch this.currentPlayer to next player
 	this.currentPlayer = ( i < (this.players.length -1) ) ? this.players[ ++i ] : this.players[0] ;
 	
-	//call the DOM update function
+	//call the interface update function
 	this.updateGUI();
 
 	return this.currentPlayer ;

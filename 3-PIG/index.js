@@ -97,7 +97,8 @@ $(document).ready(function(){
 			return false ;
 		}
 
-		$( this ).find('[type]').val(''); 		
+		console.log($(this)[0])
+		$( this )[0].reset(); 		
 
 		//start the game
 		createGame( input['player-one-name'], 

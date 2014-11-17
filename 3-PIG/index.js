@@ -18,12 +18,29 @@ $.fn.serializeObject = function(){
 	return o;
 };
 
+function enableButton(button) {
+	$(button).prop("disabled", false);
+	$(button).hover(
+		function() {
+			$(this).css("border-left", ".2em solid black");
+			$(this).css("border-top", ".2em solid black");
+			$(this).css("border-right", ".2em solid rgb(221, 221, 221)");
+			$(this).css("border-bottom", ".2em solid rgb(221, 221, 221)");
+		}, function() {
+			$(this).css("border-left", ".2em solid rgb(221, 221, 221)");
+			$(this).css("border-top", ".2em solid rgb(221, 221, 221)");
+			$(this).css("border-right", ".2em solid black");
+			$(this).css("border-bottom", ".2em solid black");
+		}
+	)
+}
+
 var updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 	$('#pot').html(pot);
 	$('#p-one > h1').html(score1);
 	$('#p-two > h1').html(score2);
-	$('#bank').prop("disabled", false);
-	$('#roll').prop("disabled", false);
+	enableButton('#bank');
+	enableButton('#roll');
 
 	if (winner) {
 		var i = thisGame.currentPlayer.index;
@@ -46,6 +63,8 @@ var updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 
 	if (pot == 0 || die[0] == die[1]) {
 		$('#bank').prop("disabled", true);
+		$('#bank').addClass('no-hover')	
+
 	}
 
 	if (die[0] == 1 || die[1] == 1) {
@@ -54,22 +73,9 @@ var updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 		var buttonTimer;
 
 		setTimeout( function(){
-			$('#roll').prop("disabled", false);
+			enableButton('#roll');
 		}, 2000 );
-
-		/*
-		function disableButtons(){
-			$('#roll-button').prop("disabled", false);
-		}
-
-		function callTimer() {
-			buttonTimer = setTimeout(disableButtons, 2000);
-		}
-
-		callTimer();
-		*/
 	}
-
 	return true;
 };
 
@@ -101,7 +107,8 @@ $(document).ready(function(){
 
 	//bank button shouldn't be enabled with a pot of 0
 	$('#bank').prop("disabled", true);
-	$('#roll').prop("disabled", false);
+	enableButton('#roll');
+
 
 	//make game submit
 	$('.create-game-modal > form').on('submit', function( event ){
@@ -149,7 +156,7 @@ $(document).ready(function(){
 		$('#diceOne').attr('src', 'images/1.png');
 		$('#diceTwo').attr('src', 'images/1.png');
 		$('#bank').prop("disabled", true);
-		$('#roll').prop("disabled", false);
+		enableButton('#roll');
 		$('.create-game-modal').slideDown('slow');
 		$('#body-container').toggleClass('make-opaque');
 	});

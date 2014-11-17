@@ -28,12 +28,6 @@ button{
 }
 
 button:hover{
-	border-right: .2em solid rgb(221, 221, 221);
-	border-bottom: .2em solid rgb(221, 221, 221);
-
-	border-top: .2em solid black;
-	border-left: .2em solid black;
-
 	-webkit-transform: scale(1.3);
 }
 

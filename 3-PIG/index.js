@@ -23,14 +23,18 @@ var updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 	$('#p-one > h1').html(score1);
 	$('#p-two > h1').html(score2);
 	$('#bank').prop("disabled", false);
+	$('#bank').removeClass('no-hover')	
 	$('#roll').prop("disabled", false);
+	$('#roll').removeClass('no-hover')	
 
 	if (winner) {
 		var i = thisGame.currentPlayer.index;
 		$('#player' + i).show();
 		alert(winner + ' IS THE WINNER!!!!!!  \n Play Again?');
 		$('#bank').prop("disabled", true);
+		$('#bank').addClass('no-hover')
 		$('#roll').prop("disabled", true);
+		$('#roll').addClass('no-hover')		
 		$('.create-game-modal').slideDown('slow');
 		$('#body-container').toggleClass('make-opaque');
 	}
@@ -46,30 +50,22 @@ var updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 
 	if (pot == 0 || die[0] == die[1]) {
 		$('#bank').prop("disabled", true);
+		$('#bank').addClass('no-hover')	
+
 	}
 
 	if (die[0] == 1 || die[1] == 1) {
 		$('#bank').prop("disabled", true);
+		$('#bank').addClass('no-hover')			
 		$('#roll').prop("disabled", true);
+		$('#roll').addClass('no-hover')			
 		var buttonTimer;
 
 		setTimeout( function(){
 			$('#roll').prop("disabled", false);
+			$('#roll').removeClass('no-hover')				
 		}, 2000 );
-
-		/*
-		function disableButtons(){
-			$('#roll-button').prop("disabled", false);
-		}
-
-		function callTimer() {
-			buttonTimer = setTimeout(disableButtons, 2000);
-		}
-
-		callTimer();
-		*/
 	}
-
 	return true;
 };
 
@@ -101,7 +97,9 @@ $(document).ready(function(){
 
 	//bank button shouldn't be enabled with a pot of 0
 	$('#bank').prop("disabled", true);
+	$('#bank').addClass('no-hover')				
 	$('#roll').prop("disabled", false);
+	$('#roll').removeClass('no-hover')				
 
 	//make game submit
 	$('.create-game-modal > form').on('submit', function( event ){
@@ -149,7 +147,9 @@ $(document).ready(function(){
 		$('#diceOne').attr('src', 'images/1.png');
 		$('#diceTwo').attr('src', 'images/1.png');
 		$('#bank').prop("disabled", true);
+		$('#bank').addClass('no-hover')					
 		$('#roll').prop("disabled", false);
+		$('#roll').removeClass('no-hover')						
 		$('.create-game-modal').slideDown('slow');
 		$('#body-container').toggleClass('make-opaque');
 	});

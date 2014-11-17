@@ -27,6 +27,13 @@ button{
 	border-bottom: .2em solid black; 
 }
 
+button .no-hover :hover{
+	border-left: .2em solid rgb(221, 221, 221);
+	border-top: .2em solid rgb(221, 221, 221);
+	border-right: .2em solid black;
+	border-bottom: .2em solid black;
+}
+
 button:hover{
 	border-right: .2em solid rgb(221, 221, 221);
 	border-bottom: .2em solid rgb(221, 221, 221);

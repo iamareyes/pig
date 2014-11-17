@@ -9,77 +9,80 @@
 		<link rel="icon" type="image/png" href="favicon.png">
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="pig.js"></script>
-		<script src="index.js"></script>
+		<script src="pig.js"defer></script>
+		<script src="index.js" defer></script>
 
 	</head>
 	<body>
 
-	<!-- creat game modal -->
-		<div id="create-game-modal" class="makeGameModal" style="display:none;">
-			<h2>Create Game:</h2>
+		<!-- creat game modal -->
+		<fieldset class="create-game-modal" style="display:none;">
+			<legend>Create Game</legend>
 
-			<form id="create-game-form" action="#" method="post">
-					<!--use the label tag to label form inputs -->
-					<label>Player One:</label><br>
-					<input type="text" name="player-one-name" required /><br><br>
+			<form action="#" method="post">
 
-					<label>Player Two:</label><br>
-					<input type="text" name="player-two-name" required /><br><br>
+				<!--use the label tag to label form inputs -->
+				<label>Player One:</label><br>
+				<input type="text" name="player-one-name" required /><br><br>
 
-					<label>Game Max Score:</label><br>
-					<input type="number" name="game-max-score" value="50" required /><br><br>
+				<label>Player Two:</label><br>
+				<input type="text" name="player-two-name" required /><br><br>
+
+				<label>Game Max Score:</label><br>
+				<input type="number" name="game-max-score" value="50" required /><br><br>
 				<!-- keep form elemnts in the form tag -->
 				<button id="create-game-button">I'm done</button>
+
 			</form>
-		</div>
-	<!-- end modal -->
+		</fieldset>
+		<!-- end modal -->
 
-		<div id="body-container" class="make-opaque">
-			<header>
-				<center>
-					<h1>Pig Dice Game</h1>
-				</center>
-			</header>
+		<header>
+			<aside>
+				Goal: <div id="max-score"></div>
+			</aside>
 
-			<div id="board-container">
-				<div class="player" id="p-one">
-					<div class="player-content-container">
-						<h3>Player One:</h3>
-						<br><br>
-						<div id="score1">0</div>
-					</div>
-				</div>
+			<section>
+				<h1>Pig Dice Game</h1>
+			</section>
 
-				<div id="game">
-					<div class="game-content-container">
-						<div id="dice-container">
-								<img id="diceOne" src="images/1.png"/>
-								<img id="diceTwo" src="images/1.png"/>  
-						</div>
-						<br><br>
-						<div id="button-container">
-							<button id="bank-button">Bank</button>
-							<button id="roll-button">Roll</button>
-						</div>
-						<br><br>
-						<h3 id="pot-label">Pot:</h3>
-						<div id="pot">0</div>
-						<h4> Goal:</h4>
-						<div id="max-score"></div>
-						<button id="brand-new-game">New Game</button>
-					</div>
-				</div>
+			<aside>
+				<button id="brand-new-game">New Game</button>
+			</aside>
+		</header>
 
-				<div class="player make-opaque" id="p-two">
-					<div class="player-content-container">
-						<h3>Player One:</h3>
-						<br><br>
-						<div id="score2">0</div>
-					</div>
-				</div>
+		<div id="spacer"></div>
 
-			</div>
-		</div> 
+		<main id="body-container" class="make-opaque">
+			<aside class="player" id="p-one">
+				<h2>Player One:</h2>
+				<h1 class="score">0</h1>
+				<img id="player0" src="images/trophy.png" width="200px" height="295" style="display:none;" />
+			</aside>
+
+			<section class="game">
+				<p class="dice">
+					<img id="diceOne" src="images/1.png" />
+					<img id="diceTwo" src="images/1.png" />
+				</p>
+
+				<p class="buttons">
+					<button id="bank">Bank</button>
+					<button id="roll">Roll</button>
+				</p>
+
+				<p>
+					<h2>Pot:</h2>
+					<h1 id="pot">0</h1>
+				</p>
+			</section>
+
+			<aside class="player make-opaque" id="p-two">
+				<h2>Player Two:</h2>
+				<h1 class="score">0</h1>
+				<img id="player1" src="images/trophy.png" width="200px" height="295" style="display:none;" />
+			</aside>
+
+		</main>
 	</body>
 </html>

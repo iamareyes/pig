@@ -18,18 +18,20 @@ $.fn.serializeObject = function(){
 	return o;
 };
 
-updateDom = function(score1, score2, nextPlayer, die, pot, winner){
+var updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 	$('#pot').html(pot);
-	$('#score1').html(score1);
-	$('#score2').html(score2);
-	$('#bank-button').prop("disabled", false)
-	$('#roll-button').prop("disabled", false)	
+	$('#p-one > h1').html(score1);
+	$('#p-two > h1').html(score2);
+	$('#bank').prop("disabled", false);
+	$('#roll').prop("disabled", false);
 
 	if (winner) {
-		alert(winner + ' IS THE WINNER!!!!!!  \n Play Again?')
-		$('#bank-button').prop("disabled", true)
-		$('#roll-button').prop("disabled", true)			
-		$('#create-game-modal').slideDown('slow');
+		var i = thisGame.currentPlayer.index;
+		$('#player' + i).show();
+		alert(winner + ' IS THE WINNER!!!!!!  \n Play Again?');
+		$('#bank').prop("disabled", true);
+		$('#roll').prop("disabled", true);
+		$('.create-game-modal').slideDown('slow');
 		$('#body-container').toggleClass('make-opaque');
 	}
 
@@ -43,42 +45,66 @@ updateDom = function(score1, score2, nextPlayer, die, pot, winner){
 	}
 
 	if (pot == 0 || die[0] == die[1]) {
-		$('#bank-button').prop("disabled", true);
+		$('#bank').prop("disabled", true);
 	}
 
 	if (die[0] == 1 || die[1] == 1) {
-		$('#bank-button').prop("disabled", true);
-		$('#roll-button').prop("disabled", true);	    		
+		$('#bank').prop("disabled", true);
+		$('#roll').prop("disabled", true);
 		var buttonTimer;
+
+		setTimeout( function(){
+			$('#roll').prop("disabled", false);
+		}, 2000 );
+
+		/*
 		function disableButtons(){
-			$('#roll-button').prop("disabled", false); 
+			$('#roll-button').prop("disabled", false);
 		}
+
 		function callTimer() {
-			buttonTimer = setTimeout(disableButtons, 2000)
-		};
+			buttonTimer = setTimeout(disableButtons, 2000);
+		}
+
 		callTimer();
+		*/
 	}
-}
+
+	return true;
+};
 
 //keep thisGame global
 var thisGame ;
 
-createGame = function(player1, player2, scoreMax){
+var createGame = function(player1, player2, scoreMax){
+
+	//hide trophy
+	$('.player > img').hide();
+
+	//start the game
 	thisGame = new Game(player1, player2, scoreMax);
-	//return thisGame;
-}
+
+	
+	//set the players name in the DOM
+	$('#p-one > h2').html( player1 );
+	$('#p-two > h2').html( player2 );
+	$('#max-score').html( scoreMax );
+
+	return true;
+};
 
 
 $(document).ready(function(){
-	//bank button shouldn't be enabled with a pot of 0
-	$('#bank-button').prop("disabled", true)	
-	$('#roll-button').prop("disabled", false)				
 
-	//show the make game model
-	$('#create-game-modal').slideDown('slow');
+	//slide the make game modal down
+	$('fieldset.create-game-modal').slideDown('slow');
+
+	//bank button shouldn't be enabled with a pot of 0
+	$('#bank').prop("disabled", true);
+	$('#roll').prop("disabled", false);
 
 	//make game submit
-	$('#create-game-modal > form').on('submit', function( event ){
+	$('.create-game-modal > form').on('submit', function( event ){
 		//stop form from processing
 		event.preventDefault();
 
@@ -87,7 +113,7 @@ $(document).ready(function(){
 		
 		//max score check
 		if( input['game-max-score'] <= 0 ){
-			alert('Please enter positive number!');
+			alert('Please enter valid score!');
 			return false ;
 		}
 
@@ -97,41 +123,34 @@ $(document).ready(function(){
 			return false ;
 		}
 
-		console.log($(this)[0])
-		$( this )[0].reset(); 		
+		//reset the form
+		$(this)[0].reset();
 
-		//start the game
-		createGame( input['player-one-name'], 
-			input['player-two-name'], 
-			input['game-max-score'] 
-		);
-		
-		//set the players name in the DOM
-		$('#p-one > * > h3').html( input['player-one-name'] );
-		$('#p-two > * > h3').html( input['player-two-name'] );
-		$('#max-score').html(input['game-max-score']);
+		createGame( input['player-one-name'], input['player-two-name'], input['game-max-score']) ;
 
-		//hide modal and show container
-		$('#create-game-modal').slideUp('fast', function(){
-			$('#body-container').toggleClass('make-opaque');
+			//hide modal and show container
+
+		$('.create-game-modal').slideUp( 'fast', function(){
+			$('#body-container').toggleClass( 'make-opaque' );
 		});
+
 		return false;
 	});
 
-	$( '#bank-button' ).on( 'click', function( event ){
+	$( '#bank' ).on( 'click', function( event ){
 		thisGame.turnControler( 'bank' );
 	} );
 
-	$('#roll-button').on('click', function(){
+	$('#roll').on('click', function(){
 		thisGame.turnControler( 'roll' );
 	});
 
 	$('#brand-new-game').on('click', function(){
 		$('#diceOne').attr('src', 'images/1.png');
-		$('#diceTwo').attr('src', 'images/1.png');		
-		$('#bank-button').prop("disabled", true)
-		$('#roll-button').prop("disabled", false)			
-		$('#create-game-modal').slideDown('slow');
+		$('#diceTwo').attr('src', 'images/1.png');
+		$('#bank').prop("disabled", true);
+		$('#roll').prop("disabled", false);
+		$('.create-game-modal').slideDown('slow');
 		$('#body-container').toggleClass('make-opaque');
 	});
 });
